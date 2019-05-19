@@ -2,6 +2,7 @@ package at.chl.apia.builders
 
 import org.hexworks.zircon.api.Tiles
 import org.hexworks.zircon.api.data.CharacterTile
+import org.hexworks.zircon.api.data.Tile
 import org.hexworks.zircon.api.graphics.Symbols
 
 object GameTileRepository {
@@ -13,6 +14,12 @@ object GameTileRepository {
             .withForegroundColor(GameColors.FLOOR_FOREGROUND)
             .withBackgroundColor(GameColors.FLOOR_BACKGROUND)
             .buildCharacterTile()
+
+    val EXIT: CharacterTile = Tiles.newBuilder()
+        .withCharacter('X')
+        .withForegroundColor(GameColors.FLOOR_BACKGROUND)
+        .withBackgroundColor(GameColors.FLOOR_FOREGROUND)
+        .buildCharacterTile()
 
     val WALL: CharacterTile = Tiles.newBuilder()
             .withCharacter('#')

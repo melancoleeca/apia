@@ -7,6 +7,7 @@ import org.hexworks.zircon.api.Sizes
 
 object GameConfig {
 
+
     // game
     const val DUNGEON_LEVELS = 1
 
@@ -19,11 +20,12 @@ object GameConfig {
     const val WINDOW_HEIGHT = 50
 
     const val SIDEBAR_WIDTH = 18
+    const val CHARINFO_HEIGHT = 20
+
     const val LOG_AREA_HEIGHT = 8
+
     const val GAMEAREA_WIDTH = WINDOW_WIDTH - SIDEBAR_WIDTH
     const val GAMEAREA_HEIGTH = WINDOW_HEIGHT - LOG_AREA_HEIGHT
-
-
 
     val WORLD_SIZE = Sizes.create3DSize(GAMEAREA_WIDTH, GAMEAREA_HEIGTH, DUNGEON_LEVELS)
 

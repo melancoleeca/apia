@@ -34,6 +34,7 @@ object Attackable : BaseFacet<GameContext>() {
                         target = target,
                         cause = "a blow to the head")
                 )
+                attacker.combatStats.bodyCount ++
             }
 
             Consumed

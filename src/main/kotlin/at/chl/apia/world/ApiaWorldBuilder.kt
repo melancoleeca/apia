@@ -19,13 +19,19 @@ class ApiaWorldBuilder(private val worldSize: Size3D) {
 
     private var startingPosition = Position3D.unknown()
     private var blocks: MutableMap<Position3D, GameBlock> = mutableMapOf()
+    private var targetPosition = Position3D.unknown()
 
 
 
     fun build(visibleSize: Size3D): World = World(blocks, visibleSize, worldSize, startingPosition)
 
     fun makeApia(): ApiaWorldBuilder {
-        return createPath().smooth(GameConfig.PATH_SMOOTHING)
+        return createPath().smooth(GameConfig.PATH_SMOOTHING).makeExit()
+    }
+
+    private fun makeExit(): ApiaWorldBuilder {
+        blocks[targetPosition] = GameBlockFactory.exitBlock()
+        return this
     }
 
     private fun createPath(): ApiaWorldBuilder {
@@ -37,7 +43,7 @@ class ApiaWorldBuilder(private val worldSize: Size3D) {
         logger.info("Starting position: $startingPosition")
         blocks[startingPosition] = GameBlockFactory.floor()
 
-        val targetPosition = this.createRandomOnEdgePosition(width, 0,  GameConfig.PATH_WIDTH_MIN)
+        targetPosition = this.createRandomOnEdgePosition(width, 0,  GameConfig.PATH_WIDTH_MIN)
         logger.info("Target position: $targetPosition")
 //        blocks[targetPosition] = GameBlockFactory.floor()
 
@@ -61,6 +67,8 @@ class ApiaWorldBuilder(private val worldSize: Size3D) {
 
             currentY--
         }
+
+
 
         return this
     }
