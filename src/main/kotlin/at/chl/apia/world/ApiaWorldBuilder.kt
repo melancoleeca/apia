@@ -5,6 +5,7 @@ import at.chl.apia.attributes.vector.Vector
 import at.chl.apia.blocks.GameBlock
 import at.chl.apia.builders.GameBlockFactory
 import at.chl.apia.extensions.sameLevelNeighborsShuffled
+import at.chl.apia.random.Random
 import org.hexworks.cobalt.logging.api.LoggerFactory
 import org.hexworks.zircon.api.Positions
 import org.hexworks.zircon.api.data.impl.Position3D
@@ -74,7 +75,7 @@ class ApiaWorldBuilder(private val worldSize: Size3D) {
     }
 
     private fun buildFloorRow(position: Position3D) {
-        val radius = (randomInt(GameConfig.PATH_WIDTH_MIN, GameConfig.PATH_WIDTH_MAX) - 1) / 2
+        val radius = (Random.randomInt(GameConfig.PATH_WIDTH_MIN, GameConfig.PATH_WIDTH_MAX) - 1) / 2
 
         for (x in position.x - radius .. position.x + radius){
             blocks[Position3D.create(x, position.y, 0)] = GameBlockFactory.floor()
@@ -104,17 +105,10 @@ class ApiaWorldBuilder(private val worldSize: Size3D) {
 
     private fun createRandomOnEdgePosition(range: Int, edge: Int, offset: Int): Position3D {
 
-        return Position3D.create(offset+randomInt(range-(2*offset)),edge,0)
+        return Position3D.create(offset+Random.randomInt(range-(2*offset)),edge,0)
     }
 
-    private fun randomInt(range: Int): Int {
-        return (Math.random()*range).toInt()
-    }
 
-    private fun randomInt(from: Int, to:Int) : Int{
-        val range = to - from
-        return from + (Math.random()*range).toInt()
-    }
 
     private fun forAllPositions(fn: (Position3D) -> Unit) {
         worldSize.fetchPositions().forEach(fn)

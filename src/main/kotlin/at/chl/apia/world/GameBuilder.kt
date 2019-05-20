@@ -11,32 +11,20 @@ import org.hexworks.zircon.api.Sizes
 import org.hexworks.zircon.api.data.Size
 import org.hexworks.zircon.api.data.impl.Size3D
 
-class GameBuilder(val worldSize: Size3D = WORLD_SIZE) {
+class GameBuilder {
 
-    private val visibleSize = Sizes.create3DSize(
-            xLength = GameConfig.WINDOW_WIDTH - GameConfig.SIDEBAR_WIDTH,
-            yLength = GameConfig.WINDOW_HEIGHT - GameConfig.LOG_AREA_HEIGHT,
-            zLength = 1)
-
-    val world = ApiaWorldBuilder(worldSize)
-            .makeApia()
-            .build(visibleSize = visibleSize)
+    val world = buildWorld()
 
     fun buildGame(): Game {
 
-        prepareWorld()
-
         val player = addPlayer()
-        addFungi()
+        return Game.create(player = player)
 
-        return Game.create(
-                player = player,
-                world = world)
     }
 
-    private fun prepareWorld() = also {
-        world.scrollUpBy(world.actualSize().zLength)
-    }
+//    private fun prepareWorld() = also {
+//        world.scrollUpBy(world.actualSize().zLength)
+//    }
 
     private fun addPlayer(): GameEntity<Player> {
         return EntityFactory.newPlayer().addToWorldOnStartingPosition()
@@ -65,8 +53,13 @@ class GameBuilder(val worldSize: Size3D = WORLD_SIZE) {
     }
 
     companion object {
+        var defaultGame : Game = GameBuilder().buildGame()
 
-        fun defaultGame() = GameBuilder(
-                worldSize = GameConfig.WORLD_SIZE).buildGame()
+        fun buildWorld() : World {
+            return ApiaWorldBuilder(WORLD_SIZE).makeApia().build(visibleSize = Sizes.create3DSize(
+                xLength = GameConfig.WINDOW_WIDTH - GameConfig.SIDEBAR_WIDTH,
+                yLength = GameConfig.WINDOW_HEIGHT - GameConfig.LOG_AREA_HEIGHT,
+                zLength = 1))
+        }
     }
 }

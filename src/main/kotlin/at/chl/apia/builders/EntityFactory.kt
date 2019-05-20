@@ -43,7 +43,8 @@ object EntityFactory {
                         attackValue = 10,
                         defenseValue = 5),
                 EntityTile(GameTileRepository.PLAYER),
-                EntityActions(Dig::class, Attack::class)
+                EntityActions(Dig::class, Attack::class),
+                PlayerStats.create()
         )
         behaviors(InputReceiver)
         facets(Movable, CameraMover, StairClimber, StairDescender)

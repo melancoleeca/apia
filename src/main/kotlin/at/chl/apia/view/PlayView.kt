@@ -3,15 +3,12 @@ package at.chl.apia.view
 
 import at.chl.apia.GameConfig
 import at.chl.apia.attributes.types.combatStats
+import at.chl.apia.attributes.types.playerStats
 import at.chl.apia.blocks.GameBlock
 import at.chl.apia.events.GameLogEvent
 import at.chl.apia.world.Game
 import at.chl.apia.world.GameBuilder
-import org.hexworks.cobalt.databinding.api.event.ChangeEvent
 import org.hexworks.cobalt.databinding.api.extensions.onChange
-import org.hexworks.cobalt.databinding.api.property.Property
-import org.hexworks.cobalt.databinding.api.value.ObservableValue
-import org.hexworks.cobalt.events.api.Event
 import org.hexworks.cobalt.events.api.subscribe
 import org.hexworks.cobalt.logging.api.LoggerFactory
 import org.hexworks.zircon.api.Components
@@ -31,7 +28,7 @@ import org.hexworks.zircon.api.uievent.Processed
 import org.hexworks.zircon.internal.Zircon
 
 
-class PlayView(private val game: Game = GameBuilder.defaultGame()) : BaseView() {
+class PlayView(private val game: Game = GameBuilder.defaultGame) : BaseView() {
 
     override val theme = GameConfig.THEME
 
@@ -65,7 +62,7 @@ class PlayView(private val game: Game = GameBuilder.defaultGame()) : BaseView() 
 
         // TODO: tutorial
         exitButton.onComponentEvent(ComponentEventType.ACTIVATED) {
-            replaceWith(StartView())
+            Director.default.backToStart()
             close()
             Processed
         }
@@ -119,13 +116,13 @@ class PlayView(private val game: Game = GameBuilder.defaultGame()) : BaseView() 
         characterInfo.addComponent(healthLabel)
 
         val bodyCountLabel = Components.label()
-                                .withText(game.player.combatStats.bodyCount.toString())
+                                .withText(game.player.playerStats.clearedMaps.plus(1).toString())
                                 .withPosition(beyondLeft(healthLabel))
                                 .build()
         characterInfo.addComponent(bodyCountLabel)
-        game.player.combatStats.bodyCountProperty.onChange{event ->
+        game.player.playerStats.clearedMapsProperty.onChange{event ->
             logger.info(event.newValue.toString())
-            bodyCountLabel.text = event.newValue.toString()
+            bodyCountLabel.text = event.newValue.plus(1).toString()
         }
 
 

@@ -124,6 +124,7 @@ class World(
     }
 
     companion object {
+
         private val DEFAULT_BLOCK = GameBlockFactory.floor()
     }
 }

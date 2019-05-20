@@ -29,13 +29,17 @@ object GameConfig {
 
     val WORLD_SIZE = Sizes.create3DSize(GAMEAREA_WIDTH, GAMEAREA_HEIGTH, DUNGEON_LEVELS)
 
-    const val PATH_WIDTH_MIN = 7
-    const val PATH_WIDTH_MAX = 17
-    const val PATH_SMOOTHING = 3
+    const val PATH_WIDTH_MIN = 5
+    const val PATH_WIDTH_MAX = 16
+    const val PATH_SMOOTHING = 2
+
+    // POPULATION
+    const val BASE_POPULATION = 5
+    const val POPULATION_LIMIT = 25
 
     // entities
     const val FUNGI_PER_LEVEL = 15
-    const val MAXIMUM_FUNGUS_SPREAD = 20
+    const val MAXIMUM_FUNGUS_SPREAD = 5
 
     fun buildAppConfig() = AppConfigs.newConfig()
             .enableBetaFeatures()

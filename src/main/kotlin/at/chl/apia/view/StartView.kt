@@ -1,5 +1,6 @@
 package at.chl.apia.view
 
+import at.chl.apia.world.GameBuilder
 import org.hexworks.zircon.api.ColorThemes
 import org.hexworks.zircon.api.Components
 import org.hexworks.zircon.api.component.ComponentAlignment
@@ -32,7 +33,8 @@ class StartView : BaseView() {
 
         // TODO: tutorial
         startButton.onComponentEvent(ComponentEventType.ACTIVATED) {
-            replaceWith(PlayView())
+
+            GameBuilder.defaultGame.startMap()
             close()
             Processed
         }
