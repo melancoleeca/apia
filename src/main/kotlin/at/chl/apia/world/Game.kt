@@ -16,7 +16,7 @@ class Game(val player: GameEntity<Player>) {
     }
 
     fun exitMap(){
-        player.playerStats.clearedMaps++
+        player.playerStats.level++
         Director.default.camp()
     }
 
@@ -30,6 +30,6 @@ class Game(val player: GameEntity<Player>) {
         world = GameBuilder.buildWorld()
         world.addAtStartingPosition(player)
         world.scrollUpBy(world.actualSize().zLength)
-        MobPopulator().populateWorld(world,player.playerStats.clearedMaps+1)
+        MobPopulator().populateWorld(world,player.playerStats.level+1)
     }
 }

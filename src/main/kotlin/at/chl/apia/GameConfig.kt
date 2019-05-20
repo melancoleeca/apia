@@ -8,6 +8,7 @@ import org.hexworks.zircon.api.Sizes
 object GameConfig {
 
 
+
     // game
     const val DUNGEON_LEVELS = 1
 
@@ -21,6 +22,9 @@ object GameConfig {
 
     const val SIDEBAR_WIDTH = 18
     const val CHARINFO_HEIGHT = 20
+    const val CHARINFO_WIDTH = SIDEBAR_WIDTH - 2
+
+    const val LABEL_WITH = CHARINFO_WIDTH
 
     const val LOG_AREA_HEIGHT = 8
 
