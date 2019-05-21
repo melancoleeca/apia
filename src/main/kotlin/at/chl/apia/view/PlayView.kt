@@ -109,27 +109,7 @@ class PlayView(private val game: Game = GameBuilder.defaultGame) : BaseView() {
             .build()
 
         val charFragment = CharacterInfoFragment(game)
-
         characterInfo.addFragment(charFragment)
-
-//        val nameLabel = Components.label().withText(game.player.name).build()
-//        characterInfo.addComponent(nameLabel)
-//
-//        val healthLabel = Components.label()
-//                                .withText(game.player.combatStats.hp.toString() +  " / " + game.player.combatStats.maxHp)
-//                                .withPosition(beyondLeft(nameLabel)).build()
-//        characterInfo.addComponent(healthLabel)
-//
-//        val bodyCountLabel = Components.label()
-//                                .withText(game.player.playerStats.level.plus(1).toString())
-//                                .withPosition(beyondLeft(healthLabel))
-//                                .build()
-//        characterInfo.addComponent(bodyCountLabel)
-//        game.player.playerStats.levelProperty.onChange{event ->
-//            logger.info(event.newValue.toString())
-//            bodyCountLabel.text = event.newValue.plus(1).toString()
-//        }
-
 
         return characterInfo
     }

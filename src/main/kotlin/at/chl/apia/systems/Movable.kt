@@ -22,9 +22,7 @@ object Movable : BaseFacet<GameContext>() {
         val previousPosition = entity.position      // 1
         var result: Response = Pass
         world.fetchBlockAt(position).map { block ->
-            if (block.isOccupied) {
-                result = entity.tryActionsOn(context, block.occupier.get())
-            } else {
+            if (!block.isOccupied) {
                 if (world.moveEntity(entity, position)) {
                     result = Consumed
                     if (entity.type == Player) {

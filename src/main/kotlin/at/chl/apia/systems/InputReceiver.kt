@@ -22,13 +22,23 @@ object InputReceiver : BaseBehavior<GameContext>() {
         val (_, _, uiEvent, player) = context
         val currentPos = player.position
         if (uiEvent is KeyboardEvent) {
+
+            logger.debug(uiEvent.code.toString())
+
             when (uiEvent.code) {
+
                 KeyCode.KEY_W -> player.moveTo(currentPos.withRelativeY(-1), context)
+                KeyCode.UP -> player.moveTo(currentPos.withRelativeY(-1), context)
+
                 KeyCode.KEY_A -> player.moveTo(currentPos.withRelativeX(-1), context)
+                KeyCode.LEFT -> player.moveTo(currentPos.withRelativeX(-1), context)
+
                 KeyCode.KEY_S -> player.moveTo(currentPos.withRelativeY(1), context)
+                KeyCode.DOWN -> player.moveTo(currentPos.withRelativeY(1), context)
+
                 KeyCode.KEY_D -> player.moveTo(currentPos.withRelativeX(1), context)
-                KeyCode.KEY_R -> player.moveUp(context)
-                KeyCode.KEY_F -> player.moveDown(context)
+                KeyCode.RIGHT -> player.moveTo(currentPos.withRelativeX(1), context)
+
                 else -> {
                     logger.debug("UI Event ($uiEvent) does not have a corresponding command, it is ignored.")
                 }
@@ -41,11 +51,4 @@ object InputReceiver : BaseBehavior<GameContext>() {
         executeCommand(MoveTo(context, this, position))
     }
 
-    private fun GameEntity<Player>.moveUp(context: GameContext) {
-        executeCommand(MoveUp(context, this))
-    }
-
-    private fun GameEntity<Player>.moveDown(context: GameContext) {
-        executeCommand(MoveDown(context, this))
-    }
 }
