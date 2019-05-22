@@ -28,6 +28,7 @@ class CharacterInfoFragment(var game: Game) : Fragment {
                 addFragment(LabelFragmentString("Name",game.player.playerStats.nameProperty))
                 addFragment(LabelFragmentInt("Health",game.player.combatStats.hpProperty))
                 addFragment(LabelFragmentInt("Level",game.player.playerStats.levelProperty))
+                addFragment(LabelFragmentInt("XP", game.player.combatStats.bodyCountProperty))
             }
     }
 

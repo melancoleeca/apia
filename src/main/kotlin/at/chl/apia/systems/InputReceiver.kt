@@ -1,9 +1,8 @@
 package at.chl.apia.systems
 
 import at.chl.apia.attributes.types.Player
-import at.chl.apia.commands.MoveDown
+import at.chl.apia.commands.Attack
 import at.chl.apia.commands.MoveTo
-import at.chl.apia.commands.MoveUp
 import at.chl.apia.extensions.GameEntity
 import at.chl.apia.extensions.position
 import at.chl.apia.world.GameContext
@@ -23,7 +22,7 @@ object InputReceiver : BaseBehavior<GameContext>() {
         val currentPos = player.position
         if (uiEvent is KeyboardEvent) {
 
-            logger.debug(uiEvent.code.toString())
+            logger.info(uiEvent.code.toString())
 
             when (uiEvent.code) {
 
@@ -38,6 +37,8 @@ object InputReceiver : BaseBehavior<GameContext>() {
 
                 KeyCode.KEY_D -> player.moveTo(currentPos.withRelativeX(1), context)
                 KeyCode.RIGHT -> player.moveTo(currentPos.withRelativeX(1), context)
+
+                KeyCode.KEY_Q -> player.executeCommand(Attack(context, player, currentPos.withRelativeY(-1)))
 
                 else -> {
                     logger.debug("UI Event ($uiEvent) does not have a corresponding command, it is ignored.")

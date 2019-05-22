@@ -21,7 +21,7 @@ import org.hexworks.zircon.api.screen.Screen
 import org.hexworks.zircon.api.uievent.UIEvent
 
 class World(
-    startingBlocks: Map<Position3D, GameBlock>,
+    blocks: Map<Position3D, GameBlock>,
     visibleSize: Size3D,
     actualSize: Size3D,
     startingPosition: Position3D
@@ -36,7 +36,7 @@ class World(
     private val engine: Engine<GameContext> = Engines.newEngine()
 
     init {
-        startingBlocks.forEach { pos, block ->
+        blocks.forEach { pos, block ->
             setBlockAt(pos, block)
             block.entities.forEach { entity ->
                 engine.addEntity(entity)

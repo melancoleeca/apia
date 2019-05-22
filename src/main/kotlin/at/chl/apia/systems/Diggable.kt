@@ -10,7 +10,7 @@ import org.hexworks.amethyst.api.entity.EntityType
 object Diggable : BaseFacet<GameContext>() {
 
     override fun executeCommand(command: GameCommand<out EntityType>) = command.responseWhenCommandIs(Dig::class) { (context, _, target) ->
-        context.world.removeEntity(target)
+        //context.world.removeEntity(target)
         Consumed
     }
 }
