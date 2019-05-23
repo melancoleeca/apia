@@ -17,12 +17,17 @@ data class CombatStats(val maxHpProperty: Property<Int>,
 
     companion object {
 
-        fun create(maxHp: Int, hp: Int = maxHp, attackValue: Int, defenseValue: Int, bodyCount: Int = 0) =
+        fun create(maxHp: Int, hp: Int = maxHp, attackValue: Int, defenseValue: Int, bodyCount: Int = 0, level: Int = 1) =
                 CombatStats(
-                        maxHpProperty = createPropertyFrom(maxHp),
-                        hpProperty = createPropertyFrom(hp),
-                        attackValueProperty = createPropertyFrom(attackValue),
-                        defenseValueProperty = createPropertyFrom(defenseValue),
+                        maxHpProperty = createPropertyFrom(calcAmount(maxHp,level)),
+                        hpProperty = createPropertyFrom(calcAmount(maxHp,level)),
+                        attackValueProperty = createPropertyFrom(calcAmount(attackValue,level)),
+                        defenseValueProperty = createPropertyFrom(calcAmount(defenseValue,level)),
                         bodyCountProperty = createPropertyFrom(bodyCount))
+
+        fun calcAmount(amount:Int, level:Int): Int{
+            return amount * ( 1  + level / 3)
+        }
+
     }
 }

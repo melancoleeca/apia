@@ -50,15 +50,16 @@ object EntityFactory {
         facets(Movable, CameraMover, Attackable, Dieable)
     }
 
-    fun newFungus(fungusSpread: FungusSpread = FungusSpread()) = newGameEntityOfType(Fungus) {
+    fun newFungus(fungusSpread: FungusSpread = FungusSpread(),level: Int = 1) = newGameEntityOfType(Fungus) {
         attributes(BlockOccupier,
                 EntityPosition(),
                 CombatStats.create(
                         maxHp = 10,
-                        attackValue = 33,
+                        attackValue = 3,
                         defenseValue = 0),
                 EntityTile(GameTileRepository.FUNGUS),
-                fungusSpread)
+                fungusSpread,
+                MobStats.create(level))
         facets(Attackable, Destructible)
         behaviors(FungusGrowth, AttackableMob)
     }

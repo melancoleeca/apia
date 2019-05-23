@@ -21,10 +21,9 @@ object AttackableMob : BaseBehavior<GameContext>() {
     private val logger = LoggerFactory.getLogger(this::class)
 
     override fun update(entity: Entity<EntityType, GameContext>, context: GameContext): Boolean {
-        logger.info("update AttackableMob: ${entity.name}")
+        logger.debug("update AttackableMob: ${entity.name}")
 
         val player = context.player
-        val world = context.world
 
         player.position.sameLevelNeighborsShuffled()
 
