@@ -32,4 +32,8 @@ class Game(val player: GameEntity<Player>) {
         world.scrollUpBy(world.actualSize().zLength)
         MobPopulator().populateWorld(world,player.playerStats.level+1)
     }
+
+    fun gameOver() {
+        Director.default.gameOver()
+    }
 }

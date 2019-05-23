@@ -47,7 +47,7 @@ object EntityFactory {
                 PlayerStats.create()
         )
         behaviors(InputReceiver)
-        facets(Movable, CameraMover, Attackable)
+        facets(Movable, CameraMover, Attackable, Dieable)
     }
 
     fun newFungus(fungusSpread: FungusSpread = FungusSpread()) = newGameEntityOfType(Fungus) {
@@ -55,12 +55,12 @@ object EntityFactory {
                 EntityPosition(),
                 CombatStats.create(
                         maxHp = 10,
-                        attackValue = 0,
+                        attackValue = 33,
                         defenseValue = 0),
                 EntityTile(GameTileRepository.FUNGUS),
                 fungusSpread)
         facets(Attackable, Destructible)
-        behaviors(FungusGrowth)
+        behaviors(FungusGrowth, AttackableMob)
     }
 }
 

@@ -9,3 +9,13 @@ fun Position3D.sameLevelNeighborsShuffled(): List<Position3D> {
         }
     }.minus(this).shuffled()
 }
+fun Position3D.isInReach(source: Position3D, range: Int): Boolean {
+
+    if((source.x==this.x && ((source.y >= this.y - range) && (source.y <=  this.y + range)))
+        ||
+        (source.y==this.y && ((source.x >= this.x - range) && (source.x <=  this.x + range)))){
+        return true
+    }
+
+    return false
+}

@@ -37,4 +37,11 @@ class Director {
         current = camp
         return current
     }
+
+    fun gameOver() : BaseView{
+        val gameOver = LoseView()
+        current.replaceWith(gameOver)
+        current = gameOver
+        return current
+    }
 }

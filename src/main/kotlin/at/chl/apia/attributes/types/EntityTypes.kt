@@ -9,7 +9,7 @@ object Wall : BaseEntityType(
         name = "wall")
 
 object Fungus : BaseEntityType(
-        name = "fungus"), Combatant
+        name = "fungus"), Combatant, Mob
 
 object StairsDown : BaseEntityType(
         name = "stairs down")

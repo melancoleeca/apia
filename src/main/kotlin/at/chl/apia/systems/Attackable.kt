@@ -4,6 +4,7 @@ import at.chl.apia.attributes.types.Combatant
 import at.chl.apia.attributes.types.combatStats
 import at.chl.apia.commands.Attack
 import at.chl.apia.commands.Destroy
+import at.chl.apia.commands.Die
 import at.chl.apia.extensions.*
 import at.chl.apia.functions.logGameEvent
 import at.chl.apia.world.GameBuilder
@@ -34,23 +35,39 @@ object Attackable : BaseFacet<GameContext>() {
             if (entity.type is Combatant){
                 logger.info(entity.id.toString())
                 val target : GameEntity<Combatant> = entity as GameEntity<Combatant>
-                logger.info(target.combatStats.defenseValue.toString())
                 val damage = Math.max(0, attacker.combatStats.attackValue - target.combatStats.defenseValue)
                 val finalDamage = (Math.random() * damage).toInt() + 1
                 target.combatStats.hp -= finalDamage
 
-                logGameEvent("The $attacker hits the $targetPosition for $finalDamage!")
-                target.whenHasNoHealthLeft {
-                    //
-                    target.executeCommand(
-                        Destroy(
-                            context = context,
-                            source = attacker,
-                            target = target,
-                            cause = "a blow to the head")
-                    )
-                    attacker.combatStats.bodyCount ++
-                }
+                logGameEvent("The $attacker hits ${entity.name} for $finalDamage!")
+
+
+
+                    target.whenHasNoHealthLeft {
+                        //
+                        if(target.isPlayer){
+                            target.executeCommand(
+                                Die(
+                                    context = context,
+                                    source = attacker,
+                                    target = target,
+                                    cause = "a blow to the head"
+                                )
+                            )
+                            attacker.combatStats.bodyCount++
+                        }
+                        else {
+                            target.executeCommand(
+                                Destroy(
+                                    context = context,
+                                    source = attacker,
+                                    target = target,
+                                    cause = "a blow to the head"
+                                )
+                            )
+                            attacker.combatStats.bodyCount++
+                        }
+                    }
                 Consumed
             }
         }
